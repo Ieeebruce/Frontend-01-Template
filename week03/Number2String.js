@@ -27,7 +27,7 @@ function convertNumberToString(number, hex) {
     integer = Math.floor(integer / hex);
   }
   string += ".";
-  // 没有小数截断
+  // 没有做小数截断
   while (fraction < 1 && fraction > 0) {
     fraction = fraction * hex;
     string += Math.floor(fraction);
