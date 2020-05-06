@@ -15,8 +15,38 @@
 //   console.log(arguments);
 // }
 // foo`hello${name}`;
-function a() {}
-function foo() {
-  return a;
+// function a() {}
+// function foo() {
+//   return a;
+// }
+// console.log(new foo);
+// var i = 1;
+// while (i < 10) {
+//   console.log(i);
+//   i++;
+//   if (i > 5) {
+//     break;
+//   }
+// }
+// new Promise((res) => res()).then(
+//   () => setTimeout(() => console.log(1), 10000),
+//   console.log(0)
+// );
+// console.log(2);
+// new Promise((res) => res()).then(() => console.log(1)), 1 + 1;
+// new Promise((res) => res()).then(() => console.log(1)), console.log(2);
+async function async1() {
+  console.log("async1 start");
+  await async2();
+  console.log("async1 end");
 }
-console.log(new foo);
+async function async2() {
+  console.log("async2");
+}
+async1();
+new Promise(function (resolve) {
+  console.log("promise1");
+  resolve();
+}).then(function () {
+  console.log("promise2");
+});
