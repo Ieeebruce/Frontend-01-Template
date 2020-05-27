@@ -50,3 +50,12 @@ new Promise(function (resolve) {
 }).then(function () {
   console.log("promise2");
 });
+var lists = document.getElementById('container').children
+let result = []
+lists.forEach(node => {
+  if (node.getAttribute('data-tag').match(/css/))
+    result.push({
+      name: node.children[1].innerText,
+      url: node.children[1].children[0].href
+    })
+});
