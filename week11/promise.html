@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>红绿灯</title>
+    <style>
+      .circle {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: gray;
+      }
+
+      .circle.red {
+        background-color: red;
+      }
+
+      .circle.green {
+        background-color: green;
+      }
+
+      .circle.yellow {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="circle"></div>
+    <script>
+      let signal = document.querySelector(".circle");
+      async function light(className, time) {
+        signal.className = "circle " + className;
+        await sleep(time);
+      }
+      function sleep(time) {
+        return new Promise((resolve) => {
+          setTimeout(resolve, time);
+        });
+      }
+      async function xxx() {
+        while (true) {
+          await light("green", 1000);
+          await light("yellow", 1000);
+          await light("red", 1000);
+        }
+      }
+      xxx()
+    </script>
+  </body>
+</html>
