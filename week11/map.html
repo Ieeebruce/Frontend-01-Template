@@ -23,41 +23,6 @@
   <body>
     <div id="map"></div>
     <button onclick="localStorage.map = JSON.stringify(map)">save</button>
-    <script>
-      // let map = new Array(10001).join(0).split('').map(s => Number(s))
-      let map = localStorage.map
-        ? JSON.parse(localStorage.map)
-        : new Array(10000).fill(0);
-      let container = document.createElement("div");
-      for (let i = 0, len = map.length; i < len; i++) {
-        let cell = document.createElement("div");
-        cell.classList.add("cell");
-        if (map[i]) {
-          cell.style.background = "#000";
-        }
-        cell.addEventListener("mouseover", (e) => {
-          if (clear) {
-            e.target.style.background = "";
-            map[i] = 0;
-          } else if (mouse) {
-            e.target.style.background = "#000";
-            map[i] = 1;
-          }
-        });
-        container.appendChild(cell);
-      }
-      document.getElementById("map").appendChild(container);
-      let mouse = false;
-      let clear = false;
-      document.body.addEventListener("mousedown", (e) => {
-        mouse = true;
-        console.log(e);
-        clear = e.which === 3;
-      });
-      document.body.addEventListener("mouseup", () => (mouse = false));
-      document.body.addEventListener("contextmenu", (e) => {
-        e.preventDefault();
-      });
-    </script>
+    <script src="./map.js"></script>
   </body>
 </html>

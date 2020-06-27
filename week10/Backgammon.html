@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Backgammon</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #canvas {
+        border: 1px solid black;
+        box-shadow: -2px -2px 2px #f3f2f2, 5px 5px 5px #6f6767;
+      }
+      #float {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 2;
+        background-color: transparent;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="canvas"></canvas>
+    <canvas id="float"></canvas>
+    <script src="./Backgammon.js"></script>
+  </body>
+</html>
