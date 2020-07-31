@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Range</title>
+    <style>
+      #dragable {
+        display: inline-block;
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端前端
+    </div>
+    <div id="dragable"></div>
+    <script>
+      let dragable = document.getElementById("dragable");
+      let baseX = 0,
+        baseY = 0;
+      dragable.addEventListener("mousedown", (event) => {
+        let startX = event.clientX;
+        let startY = event.clientY;
+        let move = (event) => {
+          let range = nearest(event.clientX, event.clientY);
+          console.log(range);
+          range.insertNode(dragable); // 在 Range 的起点处插入一个节点。
+          // let x = event.clientX + baseX - startX;
+          // let y = event.clientY + baseY - startY;
+          // dragable.style.transform = `translate(${x}px, ${y}px)`;
+        };
+        let up = (event) => {
+          baseX = baseX + event.clientX - startX;
+          baseY = baseY + event.clientY - startY;
+          document.removeEventListener("mousemove", move);
+          document.removeEventListener("mouseup", up);
+        };
+        document.addEventListener("mousemove", move);
+        document.addEventListener("mouseup", up);
+      });
+
+      let ranges = []; // 文字间的空隙
+      let container = document.getElementById("container");
+      for (let i = 0; i < container.childNodes[0].textContent.length; i++) {
+        let range = document.createRange(); // range 对象是一个包含了文本节点和文本节点的一部分的文档片段
+        range.setStart(container.childNodes[0], i);
+        range.setEnd(container.childNodes[0], i);
+        ranges.push(range);
+      }
+
+      function nearest(x0, y0) {
+        let nearestRange = null;
+        let distance = Infinity;
+        for (let range of ranges) {
+          let { x, y } = range.getBoundingClientRect(); //此方法可用于确定文本区域中选中的部分或光标的视窗坐标
+          let d = (x0 - x) ** 2 + (y0 - y) ** 2; // 对于大小判断来说 不用开根号
+          if (d < distance) {
+            distance = d;
+            nearestRange = range;
+          }
+        }
+        return nearestRange;
+      }
+    </script>
+  </body>
+</html>
